@@ -1,0 +1,4 @@
+<Solution>
+    <Project Path="SimpleDiff/SimpleDiff/SimpleDiff.fsproj" />
+    <Project Path="SimpleDiff/SimpleDiff.Tests/SimpleDiff.Tests.fsproj" />
+</Solution>
