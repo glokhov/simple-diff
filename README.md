@@ -2,6 +2,12 @@
 
 F# implementation of a diffing algorithm ported from https://github.com/gjaldon/simple-diff.
 
+### Getting started
+
+```shell
+dotnet add package SimpleDiff
+```
+
 ### Usage
 
 ```fsharp
