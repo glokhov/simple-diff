@@ -1,6 +1,7 @@
 ﻿module Tests
 
 open SimpleDiff
+open SimpleDiff.Diff
 open Xunit
 
 let oldStrings = [ "I"; "really"; "like"; "ice-cream" ]
