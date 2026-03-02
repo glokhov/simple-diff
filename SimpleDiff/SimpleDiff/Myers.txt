@@ -1,0 +1,90 @@
+﻿// https://gist.github.com/jasonm23/449e7c572b46942361bc808357019dda
+// https://publications.mpi-cbg.de/Myers_1986_6330.pdf
+
+using System;
+
+const string a = "abcabba";
+const string b = "cbabac";
+
+var m = a.Length;
+var n = b.Length;
+
+var graph = new int[m + 1, n + 1];
+
+for (var i = 1; i <= m; i++)
+{
+    graph[i, 0] = i;
+}
+
+for (var j = 1; j <= n; j++)
+{
+    graph[0, j] = j;
+}
+
+for (var i = 1; i <= m; i++)
+{
+    for (var j = 1; j <= n; j++)
+    {
+        if (a[i - 1] == b[j - 1])
+        {
+            var diagonal = graph[i - 1, j - 1];
+
+            graph[i, j] = diagonal;
+        }
+        else
+        {
+            var diagonal = graph[i - 1, j - 1];
+            var above = graph[i - 1, j];
+            var left = graph[i, j - 1];
+
+            graph[i, j] = Math.Min(Math.Min(above, left), diagonal) + 1;
+        }
+    }
+}
+
+for (var i = 0; i <= m; i++)
+{
+    for (var j = 0; j <= n; j++)
+    {
+        Console.Write(graph[i, j] + "\t");
+    }
+
+    Console.WriteLine();
+}
+
+for (var i = m; i > 0;)
+{
+    for (var j = n; j > 0;)
+    {
+        var current = graph[i, j];
+        var above = graph[i - 1, j];
+        var left = graph[i, j - 1];
+        var diagonal = graph[i - 1, j - 1];
+
+        if (above < current)
+        {
+            i--;
+            Console.Write("delete\t");
+            continue;
+        }
+
+        if (left < current)
+        {
+            j--;
+            Console.Write("insert\t");
+            continue;
+        }
+
+        if (diagonal < current)
+        {
+            i--;
+            j--;
+            Console.Write("mismatch\t");
+            continue;
+        }
+
+        i--;
+        j--;
+        Console.Write("equal\t");
+    }
+}
